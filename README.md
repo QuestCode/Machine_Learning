@@ -1,4 +1,3 @@
 # Machine Learning
 
-1. Udacity Projects
-
+1. DecisionTreeRegressor Practice
