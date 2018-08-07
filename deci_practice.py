@@ -30,5 +30,3 @@ clf.fit(X,Y)
 prediction = clf.predict([[109,34]])
 
 print (prediction)
-
-# now try using the current power ranking to predict the line
