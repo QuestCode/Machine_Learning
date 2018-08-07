@@ -12,6 +12,8 @@ X = [[180,44],[120,37],[150,40],[130,38],
 #      ['Jennifer',124,38],['Emma',133,38],['Mia',110,35],['Noah',200,45],
 #      ['James',180,47],['Olivia',170,39]]
 
+# instead of using strings convert them to a float example Male = 0 Female = 1
+
 # Y = ['Male','Female','Female','Female',
 #      'Male','Male','Male','Male',
 #      'Female','Female','Female','Male',
