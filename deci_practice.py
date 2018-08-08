@@ -40,6 +40,7 @@ print (prediction)
 print (mean_absolute_error(val_y, prediction))
 
 
+# Error handling to find out if current node is over fitting or underfitting
 def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
     model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
     model.fit(train_X, train_y)
@@ -47,7 +48,24 @@ def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
     mae = mean_absolute_error(val_y, preds_val)
     return(mae)
 
-# compare MAE with differing values of max_leaf_nodes
-for max_leaf_nodes in [5, 50, 500, 5000]:
-    my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
-    print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+def findBestLeftNodeCandidate(max_leaf_nodes, train_X, val_X, train_y, val_y):
+    lowest_left_node = 1000000000
+    lowest_mae = 1000000000
+    # compare MAE with differing values of max_leaf_nodes
+    for max_leaf_nodes in [5, 50, 500, 5000]:
+        my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
+        print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+        if (my_mae < lowest_mae):
+            lowest_mae = my_mae
+            lowest_left_node = max_leaf_nodes
+    return lowest_left_node
+
+max_leaf_nodes_candidates = [5,10,15,20,25,30]
+
+best_tree_size = findBestLeftNodeCandidate(max_leaf_nodes_candidates, train_X, val_X, train_y, val_y)
+final_model = DecisionTreeRegressor(max_leaf_nodes=best_tree_size, random_state=1)
+
+# fit the final model
+final_model.fit(X, Y)
+
+print (final_model.predict([[190,40]]))
